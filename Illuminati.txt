@@ -1,0 +1,45 @@
+1)
+Jelaskan pengertian CBQ dan HTB! (point 4)
+Jawaban :
+CBQ atau Class Based Queue merupakan disiplin antrian untuk network scheduler yang memungkin traffic untuk membagi bandwidth secara merata, setelah dibagi ke beberapa kelas. 
+
+HTB atau Hierarchical Token Bucket merupakan pengganti antrian yang lebih bagus dari CBQ di Linux ini berguna untuk membatasi kecepatan unduh atau unggah klien terbatas tidak dapat memenuhi total bandwidth. 
+
+2)
+Jelaskan parameter dari HTB yaitu rate, ceil, burst ! (point 3)
+Jawaban :
+rate: menentukan bandwidth maksimum yang bisa dipakai oleh setiap class, jika bandwidth melebihi nilai “rate” maka paket data akan dipotong atau dijatuhkan (drop).
+
+ceil: menentukan peminjaman bandwidth antar class, peminjaman bandwith dilakukan class paling bawah ke class di atasnya (link sharing).
+
+burst: memungkinkan sebuah host mendapatkan alokasi bandwidth lebih dari maksimum rate dalam waktu tertentu.
+
+3)
+
+Jelaskan parameter avpkt, rate, borrow, dan isolated yang digunakan CBQ untuk menentukan jenis queue! (point 4)
+
+Jawaban :
+avpkt: Jumlah paket rata – rata saat pengiriman.
+
+rate: Kecepatan rata – rata paket data saat meninggalkan qdisc untuk mengatur bandwidth.
+
+borrow: berarti kelas class dapat meminjam bandwidth dari class lain.
+
+isolated: Mengatur agar bandwidth tidak bisa dipinjam oleh class lain yang sama tingkat.
+
+4)
+Tuliskan script add queue discipline classes CBQ dengan aturan : (point 2)
+a. rate = 3Mbit
+b. avpkt = 10000
+c. bounded
+Jawaban :
+tc class add dev r0-eth0 parent 1: classid 1:1 cbq rate 3Mbit avpkt 1000 bounded
+
+5)
+Tuliskan script add class root HTB dengan aturan sebagai berikut: (point 2)
+a. parent =  root handle
+b. classid = 1:1
+c. rate = 10Mbit
+
+Jawaban :
+s0.cmdPrint( tc class add dev s0-eth0 parent 1: classid 1:1 htb rate 10Mbit  )
